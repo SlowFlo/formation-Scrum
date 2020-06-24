@@ -53,7 +53,7 @@ class Game:
                 print("%s is getting out of the penalty box" % self.players[self.current_player])
                 self.places[self.current_player] = self.places[self.current_player] + roll
                 if self.places[self.current_player] > 11:
-                    self.places[self.current_player] = self.places[self.current_player] - 12
+                    self.back_to_behind()
 
                 print(self.players[self.current_player] + \
                       '\'s new location is ' + \
@@ -66,13 +66,16 @@ class Game:
         else:
             self.places[self.current_player] = self.places[self.current_player] + roll
             if self.places[self.current_player] > 11:
-                self.places[self.current_player] = self.places[self.current_player] - 12
+                self.back_to_behind()
 
             print(self.players[self.current_player] + \
                   '\'s new location is ' + \
                   str(self.places[self.current_player]))
             print("The category is %s" % self._current_category)
             self._ask_question()
+
+    def back_to_behind(self):
+        self.places[self.current_player] = self.places[self.current_player] - 12
 
     def _ask_question(self):
         if self._current_category == 'Pop': print(self.pop_questions.pop(0))
