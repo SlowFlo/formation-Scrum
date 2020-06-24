@@ -2,6 +2,7 @@
 
 class Game:
     def __init__(self):
+        self.SIZE_BOARD = 12
         self.players = []
         self.places = [0] * 6
         self.purses = [0] * 6
@@ -53,8 +54,8 @@ class Game:
 
     def move_player(self, roll):
         self.places[self.current_player] = self.places[self.current_player] + roll
-        if self.places[self.current_player] > 11:
-            self.back_to_behind()
+        if self.places[self.current_player] >= self.SIZE_BOARD:
+            self.back_to_beginning()
         print(self.players[self.current_player] + \
               '\'s new location is ' + \
               str(self.places[self.current_player]))
@@ -71,8 +72,8 @@ class Game:
             print("%s is not getting out of the penalty box" % self.players[self.current_player])
             self.is_getting_out_of_penalty_box = False
 
-    def back_to_behind(self):
-        self.places[self.current_player] = self.places[self.current_player] - 12
+    def back_to_beginning(self):
+        self.places[self.current_player] = self.places[self.current_player] - self.SIZE_BOARD
 
     def _ask_question(self):
         if self._current_category == 'Pop': print(self.pop_questions.pop(0))
