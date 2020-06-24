@@ -22,6 +22,9 @@ class Game:
             self.sports_questions.append("Sports Question %s" % i)
             self.rock_questions.append(self.create_rock_question(i))
 
+    def pair(self, roll):
+        return roll % 2 != 0
+
     def create_rock_question(self, index):
         return "Rock Question %s" % index
 
@@ -63,7 +66,7 @@ class Game:
         self._ask_question()
 
     def check_penality(self, roll):
-        if roll % 2 != 0:
+        if self.pair(roll):
             self.is_getting_out_of_penalty_box = True
 
             print("%s is getting out of the penalty box" % self.players[self.current_player])
