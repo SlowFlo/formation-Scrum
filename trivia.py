@@ -54,6 +54,7 @@ class Game:
             self.check_penality(roll)
         else:
             self.move_player(roll)
+            self._ask_question()
 
     def move_player(self, roll):
         self.places[self.current_player] = self.places[self.current_player] + roll
@@ -62,8 +63,6 @@ class Game:
         print(self.players[self.current_player] + \
               '\'s new location is ' + \
               str(self.places[self.current_player]))
-        print("The category is %s" % self._current_category)
-        self._ask_question()
 
     def check_penality(self, roll):
         if self.pair(roll):
@@ -71,6 +70,7 @@ class Game:
 
             print("%s is getting out of the penalty box" % self.players[self.current_player])
             self.move_player(roll)
+            self._ask_question()
         else:
             print("%s is not getting out of the penalty box" % self.players[self.current_player])
             self.is_getting_out_of_penalty_box = False
@@ -79,6 +79,7 @@ class Game:
         self.places[self.current_player] = self.places[self.current_player] - self.SIZE_BOARD
 
     def _ask_question(self):
+        print("The category is %s" % self._current_category)
         if self._current_category == 'Pop': print(self.pop_questions.pop(0))
         if self._current_category == 'Science': print(self.science_questions.pop(0))
         if self._current_category == 'Sports': print(self.sports_questions.pop(0))
